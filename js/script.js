@@ -12,31 +12,36 @@ $(document).ready(function() {
 
         thisSquare = $(this);
 
-        $.ajax({
-            'url': 'https://flynn.boolean.careers/exercises/api/random/int',
-            'method': 'get',
-            'success': function(data) {
+            $.ajax({
+                'url': 'https://flynn.boolean.careers/exercises/api/random/int',
+                'method': 'get',
+                'success': function(data) {
+                    console.log(thisSquare);
+                    var random = data.response;
 
-            var random = data.response;
-            thisSquare.children('span').text('');
-            thisSquare.children('span').append(random);
+                    // thisSquare.children('span').text('');
+                    // thisSquare.children('span').append(random);
+                    if (thisSquare.hasClass('cliccato')) {
+                        alert('Già cliccato')
+                    }else{
+                        thisSquare.addClass('cliccato');
+                            thisSquare.children('span').append(random);
 
-            if (random <= 5) {
-                thisSquare.addClass('yellow');
-                thisSquare.removeClass('green');
-                } else {
-                thisSquare.addClass('green');
-                thisSquare.removeClass('yellow');
+                        if (random <= 5) {
+                            thisSquare.addClass('yellow');
+                            // thisSquare.removeClass('green');
+                            } else {
+                            thisSquare.addClass('green');
+                            // thisSquare.removeClass('yellow');
+                        }
+                    }
+                },
+
+                'error': function() {
+                alert('Seven days!!!');
                 }
-            },
+            });
 
-
-
-            'error': function() {
-            alert('Qualcosa è andato storto');
-
-            }
-        });
     });
 
 });
